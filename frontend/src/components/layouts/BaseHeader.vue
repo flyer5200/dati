@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import { isDark, toggleDark } from "~/composables";
-import { Moon, Sunny, CircleClose, Key } from "@element-plus/icons-vue";
+import { CircleClose, Key, Moon, Sunny } from "@element-plus/icons-vue";
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
-import { setI18nLanguage, type AppLang } from "~/plugins/i18n";
+import { type AppLang, setI18nLanguage } from "~/plugins/i18n";
 import { useAuthStore } from "~/stores/auth";
 
 const { t, locale } = useI18n();
@@ -12,7 +12,9 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const localeLabel = computed(() => (locale.value === "zh" ? "中文" : "EN"));
-const userDisplayName = computed(() => authStore.user?.display_name || authStore.user?.name || "");
+const userDisplayName = computed(
+  () => authStore.user?.display_name || authStore.user?.name || "",
+);
 const appVersion = __APP_VERSION__;
 
 async function changeLocale(lang: AppLang) {
@@ -28,12 +30,17 @@ function handleCommand(command: string) {
 }
 
 function goToDocs() {
-  window.open('/docs/', '_blank');
+  window.open("/docs/", "_blank");
 }
 </script>
 
 <template>
-  <el-menu class="el-menu-demo" mode="horizontal" :ellipsis="false" :default-active="''">
+  <el-menu
+    class="el-menu-demo"
+    mode="horizontal"
+    :ellipsis="false"
+    :default-active="''"
+  >
     <el-menu-item index="/" @click="router.push('/')">
       <div class="flex items-center justify-center gap-2">
         <img src="/dati.svg" alt="dati" class="size-7 object-contain" />
@@ -47,7 +54,6 @@ function goToDocs() {
         </span>
       </div>
     </el-menu-item>
-
 
     <el-menu-item index="header-theme" class="h-full" @click="toggleDark()">
       <button
@@ -87,11 +93,27 @@ function goToDocs() {
       </el-tooltip>
     </el-menu-item>
 
-    <el-menu-item index="header-user" class="h-full" v-if="authStore.isLoggedIn">
+    <el-menu-item
+      index="header-user"
+      class="h-full"
+      v-if="authStore.isLoggedIn"
+    >
       <el-dropdown trigger="click" @command="handleCommand">
-        <div class="size-full flex items-center justify-center gap-2 cursor-pointer">
-          <el-avatar :size="24">{{ userDisplayName.charAt(0).toUpperCase() }}</el-avatar>
+        <div
+          class="size-full flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <el-avatar :size="24">{{
+            userDisplayName.charAt(0).toUpperCase()
+          }}</el-avatar>
           <span class="text-sm">{{ userDisplayName }}</span>
+          <el-tag
+            v-if="authStore.isGuest"
+            size="small"
+            type="info"
+            class="select-none"
+          >
+            {{ t("auth.guestBadge") }}
+          </el-tag>
         </div>
         <template #dropdown>
           <el-dropdown-menu>

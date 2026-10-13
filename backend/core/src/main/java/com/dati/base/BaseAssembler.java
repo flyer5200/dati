@@ -53,6 +53,8 @@ public class BaseAssembler {
                 if (user != null) {
                     vo.setCreatedUserName(
                             user.getDisplayName() != null ? user.getDisplayName() : user.getName());
+                } else if (vo.getCreatedBy().startsWith("guest")) {
+                    vo.setCreatedUserName("Guest");
                 }
             }
             if (vo.getUpdatedBy() != null) {
@@ -60,6 +62,8 @@ public class BaseAssembler {
                 if (user != null) {
                     vo.setUpdatedUserName(
                             user.getDisplayName() != null ? user.getDisplayName() : user.getName());
+                } else if (vo.getUpdatedBy().startsWith("guest")) {
+                    vo.setUpdatedUserName("Guest");
                 }
             }
         });

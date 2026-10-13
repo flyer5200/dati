@@ -51,6 +51,11 @@ export default {
     confirmPasswordPlaceholder: "Confirm password",
     loginFailed: "Sign in failed",
     registerFailed: "Registration failed",
+    guestLogin: "Try as Guest",
+    guestBadge: "Guest",
+    guestLoginFailed: "Failed to enter guest mode",
+    guestFooterHint: "No account required",
+    guestLoginAction: "Try as Guest →",
   },
 
   common: {

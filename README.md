@@ -23,8 +23,6 @@ DatI (Data Intelligence) is a lightweight semantic gateway connecting **AI Agent
 
 Demo URL: https://dati-demo.zhangyimin.me
 
-Account / Password: `demo` / `demo123`
-
 The demo instance is preloaded with sample data and reset periodically.
 
 ### Demo

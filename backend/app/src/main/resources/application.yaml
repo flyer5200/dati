@@ -40,6 +40,8 @@ management:
 
 auth:
   admin-users: ${ADMIN_USERS:admin}
+  guest:
+    enabled: ${AUTH_GUEST_ENABLED:true}
   jwt:
     secret: ${JWT_SECRET:this-is-a-32-char-long-default-secret-key}
     expiration-seconds: 604800

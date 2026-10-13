@@ -16,6 +16,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private static final String[] AUTH_EXCLUDE_PATHS = {
             "/v1/auth/login",
             "/v1/auth/register",
+            "/v1/auth/guest",
             "/v1/public/**"
     };
 

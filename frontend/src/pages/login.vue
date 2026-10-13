@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { User, Lock } from "@element-plus/icons-vue";
+import { Lock, User } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { useAuthStore } from "~/stores/auth";
 
@@ -24,13 +24,25 @@ async function handleLogin() {
     ElMessage.error(err.message || t("auth.loginFailed"));
   }
 }
+
+async function handleGuestLogin() {
+  try {
+    await authStore.loginAsGuest();
+  } catch (err: any) {
+    ElMessage.error(err.message || t("auth.guestLoginFailed"));
+  }
+}
 </script>
 
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-[var(--ep-fill-color-light)]">
+  <div
+    class="min-h-screen flex items-center justify-center bg-[var(--ep-fill-color-light)]"
+  >
     <el-card class="w-96">
       <template #header>
-        <div class="text-center text-xl font-bold">{{ t("auth.loginTitle") }}</div>
+        <div class="text-center text-xl font-bold">
+          {{ t("auth.loginTitle") }}
+        </div>
       </template>
 
       <el-form :model="form" label-position="top" @submit.prevent="handleLogin">
@@ -52,7 +64,7 @@ async function handleLogin() {
           />
         </el-form-item>
 
-        <el-form-item>
+        <el-form-item class="!mb-4">
           <el-button
             type="primary"
             native-type="submit"
@@ -65,12 +77,34 @@ async function handleLogin() {
       </el-form>
 
       <div class="text-center text-sm">
-        <span class="text-[var(--ep-text-color-regular)]">{{ t("auth.noAccount") }}</span>
-        {{ ' ' }}
-        <RouterLink to="/register" class="text-[var(--ep-color-primary)] hover:underline">
+        <span class="text-[var(--ep-text-color-regular)]">{{
+          t("auth.noAccount")
+        }}</span>
+        {{ " " }}
+        <RouterLink
+          to="/register"
+          class="text-[var(--ep-color-primary)] hover:underline"
+        >
           {{ t("auth.toRegister") }}
         </RouterLink>
       </div>
+
+      <template #footer>
+        <div class="flex items-center justify-between py-0.5">
+          <span class="text-xs text-[var(--ep-text-color-secondary)]">
+            {{ t("auth.guestFooterHint") }}
+          </span>
+          <el-button
+            type="primary"
+            link
+            class="!p-0 !text-xs font-medium"
+            :loading="authStore.loading"
+            @click="handleGuestLogin"
+          >
+            {{ t("auth.guestLoginAction") }}
+          </el-button>
+        </div>
+      </template>
     </el-card>
   </div>
 </template>

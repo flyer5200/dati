@@ -51,6 +51,11 @@ export default {
     confirmPasswordPlaceholder: "请再次输入密码",
     loginFailed: "登录失败",
     registerFailed: "注册失败",
+    guestLogin: "游客体验",
+    guestBadge: "游客",
+    guestLoginFailed: "进入游客模式失败",
+    guestFooterHint: "无需注册账号",
+    guestLoginAction: "游客体验 →",
   },
 
   common: {

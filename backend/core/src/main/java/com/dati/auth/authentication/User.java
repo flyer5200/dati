@@ -11,4 +11,9 @@ public class User {
 
     private String displayName;
 
+    @com.fasterxml.jackson.annotation.JsonProperty("is_guest")
+    public boolean isGuest() {
+        return id != null && id.startsWith("guest-");
+    }
+
 }

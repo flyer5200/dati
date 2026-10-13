@@ -45,6 +45,8 @@ export interface User {
   id: string;
   name: string;
   display_name?: string;
+  is_guest?: boolean;
+  guest?: boolean;
 }
 
 

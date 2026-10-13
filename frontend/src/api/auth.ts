@@ -1,18 +1,18 @@
-import { get, post, del } from "./http";
+import { del, get, post } from "./http";
 import type {
-  LoginRequest,
-  RegisterRequest,
-  LoginResponse,
-  User,
-  IdResponse,
   ApiKey,
   ApiKeyCreated,
+  IdResponse,
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+  User,
 } from "./types";
 
 export async function login(
   type: string,
   name: string,
-  password: string
+  password: string,
 ): Promise<LoginResponse> {
   return post<LoginResponse>("/v1/auth/login", {
     type,
@@ -21,9 +21,11 @@ export async function login(
   } as LoginRequest);
 }
 
-export async function register(
-  request: RegisterRequest
-): Promise<IdResponse> {
+export async function guestLogin(): Promise<LoginResponse> {
+  return post<LoginResponse>("/v1/auth/guest");
+}
+
+export async function register(request: RegisterRequest): Promise<IdResponse> {
   return post<IdResponse>("/v1/auth/register", request);
 }
 
@@ -33,7 +35,7 @@ export async function me(): Promise<User> {
 
 export async function createApiKey(
   name: string,
-  expiresInDays?: number
+  expiresInDays?: number,
 ): Promise<ApiKeyCreated> {
   return post<ApiKeyCreated>("/v1/auth/api-keys", {
     name,
