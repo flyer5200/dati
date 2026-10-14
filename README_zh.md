@@ -121,7 +121,10 @@ docker compose up -d
 - **API 契约**：[docs/api/openapi.json](docs/api/openapi.json)（E2E 测试工具链使用）
 - **AI 编码助手规范**：[AGENTS.md](AGENTS.md) 与 [.agents/rules/](.agents/rules)（后端/前端/设计系统规范）
 
-## 致谢
+## 社区与交流
 
-感谢来自 [LINUX DO](https://linux.do/t/topic/2929301) 社区的讨论与支持。
+- **社区讨论**：[LINUX DO](https://linux.do/t/topic/2929301)
+- **微信公众号**：
+
+  <img src="docs/images/qrcode_for_dati_niffler.jpg" width="140" alt="微信公众号" />
 

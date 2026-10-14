@@ -21,7 +21,7 @@ public class SpringDocConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("DatI API")
-                        .version("0.7.2"));
+                        .version("0.8.0"));
     }
 
     /**
